@@ -326,6 +326,8 @@ export class Viewer extends EventDispatcher{
 
 		this.loadGUI = this.loadGUI.bind(this);
 
+		this.measureCoordinateCallback = args.measureCoordinateCallback || (value => value);
+		
 		this.annotationTool = new AnnotationTool(this);
 		this.measuringTool = new MeasuringTool(this);
 		this.profileTool = new ProfileTool(this);

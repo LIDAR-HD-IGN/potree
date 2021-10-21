@@ -391,6 +391,7 @@ export class PointCloudOctree extends PointCloudTree {
 	}
 
 	nodeIntersectsProfile (node, profile) {
+		// return this.nodeIntersectsProfile_2 (node, profile);
 		let bbWorld = node.boundingBox.clone().applyMatrix4(this.matrixWorld);
 		let bsWorld = bbWorld.getBoundingSphere(new THREE.Sphere());
 
@@ -410,6 +411,18 @@ export class PointCloudOctree extends PointCloudTree {
 		//console.log(`${node.name}: ${intersects}`);
 
 		return intersects;
+	}
+
+	nodeIntersectsProfile_2 (node, profile) {
+		let bbWorld = node.boundingBox.clone(); // .applyMatrix4(this.matrixWorld);
+		let bsWorld = bbWorld.getBoundingSphere(new THREE.Sphere());
+
+		const matInv = new THREE.Matrix4().copy(this.matrixWorld).invert();
+
+		const pointsProfile = profile.points.map(p => p.clone().applyMatrix4(matInv));
+		const bboxProfile = new THREE.Box3().setFromPoints(pointsProfile);
+
+		return bbWorld.intersectsBox(bboxProfile);
 	}
 
 	deepestNodeAt(position){

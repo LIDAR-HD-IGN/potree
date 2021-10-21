@@ -82,17 +82,20 @@ export class ProfileRequest {
 			let node = stack.pop();
 			let weight = node.boundingSphere.radius;
 
-			this.priorityQueue.push({node: node, weight: weight});
+	   		if (!this.priorityQueue.content.find(e => e.node.name == node.name)) {
 
-			// add children that intersect the cutting plane
-			if (node.level < this.maxDepth) {
-				for (let i = 0; i < 8; i++) {
-					let child = node.children[i];
-					if (child && this.pointcloud.nodeIntersectsProfile(child, this.profile)) {
-						stack.push(child);
+				this.priorityQueue.push({node: node, weight: weight});
+
+				// add children that intersect the cutting plane
+				if (node.level < this.maxDepth) {
+					for (let i = 0; i < 8; i++) {
+						let child = node.children[i];
+						if (child && this.pointcloud.nodeIntersectsProfile(child, this.profile)) {
+							stack.push(child);
+						}
 					}
 				}
-			}
+    		}
 		}
 	}
 

@@ -14,13 +14,14 @@ export class ProfileData {
 			let start = profile.points[i];
 			let end = profile.points[i + 1];
 
-			let startGround = new THREE.Vector3(start.x, start.y, 0);
-			let endGround = new THREE.Vector3(end.x, end.y, 0);
+			let startGround = new THREE.Vector3(start.x, start.y, start.z);
+			let endGround = new THREE.Vector3(end.x, end.y, end.z);
 
 			let center = new THREE.Vector3().addVectors(endGround, startGround).multiplyScalar(0.5);
 			let length = startGround.distanceTo(endGround);
 			let side = new THREE.Vector3().subVectors(endGround, startGround).normalize();
-			let up = new THREE.Vector3(0, 0, 1);
+			// let up = new THREE.Vector3(0, 0, 1);
+			let up = start.clone().normalize();
 			let forward = new THREE.Vector3().crossVectors(side, up).normalize();
 			let N = forward;
 			let cutPlane = new THREE.Plane().setFromNormalAndCoplanarPoint(N, startGround);
@@ -198,6 +199,12 @@ export class ProfileRequest {
 
 		let view = new Float32Array(node.geometry.attributes.position.array);
 
+		const end = new itowns.Coordinates('EPSG:4978', segment.end.x, segment.end.y, segment.end.z).as('EPSG:2154').toVector3();
+		const start = new itowns.Coordinates('EPSG:4978', segment.start.x, segment.start.y, segment.start.z).as('EPSG:2154').toVector3();
+		let sv = new THREE.Vector3().subVectors(end, start).setZ(0);
+
+		let segmentDirL93 = sv.clone().normalize();
+
 		for (let i = 0; i < numPoints; i++) {
 
 			pos.set(
@@ -210,13 +217,13 @@ export class ProfileRequest {
 			let centerDistance = Math.abs(segment.halfPlane.distanceToPoint(pos));
 
 			if (distance < this.profile.width / 2 && centerDistance < segment.length / 2) {
-				svp.subVectors(pos, segment.start);
-				let localMileage = segmentDir.dot(svp);
+				const coord = new itowns.Coordinates('EPSG:4978', pos.x, pos.y, pos.z).as('EPSG:2154').toVector3();
+				svp.subVectors(coord, start);
+				let localMileage = segmentDirL93.dot(svp);
 
-				const coord = new itowns.Coordinates('EPSG:4978', pos.x, pos.y, pos.z).as('EPSG:2154');
 				accepted[numAccepted] = i;
 				mileage[numAccepted] = localMileage + totalMileage;
-				points.boundingBox.expandByPoint(pos);
+				points.boundingBox.expandByPoint(coord);
 
 				// pos.sub(this.pointcloud.position);
 

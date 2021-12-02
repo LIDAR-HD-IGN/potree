@@ -140,6 +140,7 @@ export class Viewer extends EventDispatcher{
 		this.useEDL = false;
 		this.description = "";
 		this.dynamicNearFar = args.dynamicNearFar == undefined ? true : args.dynamicNearFar;
+		this.isGeocentric = args.isGeocentric == undefined ? true : args.isGeocentric;
 
 		this.classifications = ClassificationScheme.DEFAULT;
 

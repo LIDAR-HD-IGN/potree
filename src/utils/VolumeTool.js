@@ -97,6 +97,11 @@ export class VolumeTool extends EventDispatcher{
 				// let pp = new THREE.Vector4(wp.x, wp.y, wp.z).applyMatrix4(camera.projectionMatrix);
 				let w = Math.abs((wp.z / 5));
 				volume.scale.set(w, w, w);
+
+				// Volume orientation to earth center
+				if (this.viewer.isGeocentric) {
+					volume.lookAt(new THREE.Vector3());
+				}
 			}
 		};
 

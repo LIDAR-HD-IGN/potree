@@ -51,13 +51,14 @@ class Batch{
 
 class ProfileFakeOctree extends PointCloudTree{
 
-	constructor(octree){
+	constructor(octree, isGeocentric = false){
 		super();
 
 		this.trueOctree = octree;
 		this.pcoGeometry = octree.pcoGeometry;
 		this.points = [];
 		this.visibleNodes = [];
+		this.isGeocentric = true;
 		
 		//this.material = this.trueOctree.material;
 		this.material = new PointCloudMaterial();
@@ -124,11 +125,13 @@ class ProfileFakeOctree extends PointCloudTree{
 				};
 			}
 
-			truePos.set(
-				data.data.position[3 * i + 0] + this.trueOctree.position.x,
-				data.data.position[3 * i + 1] + this.trueOctree.position.y,
-				data.data.position[3 * i + 2] + this.trueOctree.position.z,
-			);
+			// Copy local position
+			truePos.fromArray(data.data.position, 3 * i);
+
+			// place in world
+			if (!this.isGeocentric) {
+				truePos.add(this.trueOctree.position)
+			}
 
 			let x = data.data.mileage[i];
 			let y = 0;
@@ -338,18 +341,24 @@ export class ProfileWindow extends EventDispatcher {
 				if (closest) {
 					let point = closest.point;
 
-					let position = new Float64Array([
-						point.position[0] + closest.pointcloud.position.x,
-						point.position[1] + closest.pointcloud.position.y,
-						point.position[2] + closest.pointcloud.position.z
-					]);
+					let position;
+					let altitude;
+
+					if (this.viewer.isGeocentric) {
+						position = new itowns.Coordinates(this.viewer.crs, ...point.position);
+						altitude = position.z
+						position = position.as('EPSG:4978', position).toVector3();
+					} else {
+						position = new THREE.Vector3().fromArray(point.position).add(closest.pointcloud.position);
+						altitude = position.z
+					}
 
 					this.elRoot.find('#profileSelectionProperties').fadeIn(200);
 					this.pickSphere.visible = true;
 					this.pickSphere.scale.set(0.5 * radius, 0.5 * radius, 0.5 * radius);
-					this.pickSphere.position.set(point.mileage, 0, position[2]);
+					this.pickSphere.position.set(point.mileage, 0, altitude);
 
-					this.viewerPickSphere.position.set(...position);
+					this.viewerPickSphere.position.copy(position);
 					
 					if(!this.viewer.scene.scene.children.includes(this.viewerPickSphere)){
 						this.viewer.scene.scene.add(this.viewerPickSphere);
@@ -559,7 +568,11 @@ export class ProfileWindow extends EventDispatcher {
 				for (let i = 0; i < points.numPoints; i++) {
 
 					let m = points.data.mileage[i] - mileage;
-					let e = points.data.position[3 * i + 2] - elevation + pointcloud.position.z;
+					let e = points.data.position[3 * i + 2] - elevation;
+					if (!this.viewer.isGeocentric) {
+						e += pointcloud.position.z;
+					}
+
 					let r = Math.sqrt(m * m + e * e);
 
 					const withinDistance = r < radius && r < closest.distance;
@@ -708,7 +721,7 @@ export class ProfileWindow extends EventDispatcher {
 
 		let entry = this.pointclouds.get(pointcloud);
 		if(!entry){
-			entry = new ProfileFakeOctree(pointcloud);
+			entry = new ProfileFakeOctree(pointcloud, this.viewer.isGeocentric);
 			this.pointclouds.set(pointcloud, entry);
 			this.profileScene.add(entry);
 

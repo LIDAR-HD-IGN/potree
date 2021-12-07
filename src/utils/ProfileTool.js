@@ -53,7 +53,7 @@ export class ProfileTool extends EventDispatcher {
 	startInsertion (args = {}) {
 		let domElement = this.viewer.renderer.domElement;
 
-		let profile = new Profile();
+		let profile = new Profile(this.viewer);
 		profile.name = args.name || 'Profile';
 
 		this.dispatchEvent({

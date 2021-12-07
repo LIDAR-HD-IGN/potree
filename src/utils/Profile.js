@@ -17,6 +17,7 @@ export class Profile extends THREE.Object3D{
 		this.width = 1;
 		this.height = 20;
 		this._modifiable = true;
+		this.isGeocentric = false;
 
 		this.sphereGeometry = new THREE.SphereGeometry(0.4, 10, 10);
 		this.color = new THREE.Color(0xff0000);
@@ -126,6 +127,7 @@ export class Profile extends THREE.Object3D{
 					e.viewer.scene.pointclouds);
 
 				if (I) {
+					this.isGeocentric = e.viewer;
 					let i = this.spheres.indexOf(e.drag.object);
 					if (i !== -1) {
 						this.setPosition(i, I.location);
@@ -275,19 +277,41 @@ export class Profile extends THREE.Object3D{
 			}
 
 			if (leftBox) {
-				let start = leftVertex;
-				let end = point;
-				let length = start.clone().setZ(0).distanceTo(end.clone().setZ(0));
-				leftBox.scale.set(length, 1000000, this.width);
-				leftBox.up.set(0, 0, 1);
+				if (this.isGeocentric) {
+					const line = new THREE.Line3(leftVertex, point);
+					let length = line.distance() || 1;
 
-				let center = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
-				let diff = new THREE.Vector3().subVectors(end, start);
-				let target = new THREE.Vector3(diff.y, -diff.x, 0);
+					leftBox.scale.set(length, 1000000, this.width);
+					let center = line.getCenter(new THREE.Vector3());
 
-				leftBox.position.set(0, 0, 0);
-				leftBox.lookAt(target);
-				leftBox.position.copy(center);
+					leftBox.position.copy(center);
+					leftBox.quaternion.identity();
+					leftBox.lookAt(new THREE.Vector3());
+					leftBox.rotateX(-Math.PI * 0.5);
+
+					leftBox.updateMatrixWorld(true);
+					const h = line.end.clone();
+					leftBox.worldToLocal(h);
+
+					h.multiply(leftBox.scale);
+					const d = new THREE.Vector2(h.z, h.x);
+					leftBox.rotateY(d.angle() + Math.PI * 0.5);
+
+				} else {
+					let start = leftVertex;
+					let end = point;
+					let length = start.clone().setZ(0).distanceTo(end.clone().setZ(0));
+					leftBox.scale.set(length, 1000000, this.width);
+					leftBox.up.set(0, 0, 1);
+
+					let center = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+					let diff = new THREE.Vector3().subVectors(end, start);
+					let target = new THREE.Vector3(diff.y, -diff.x, 0);
+
+					leftBox.position.set(0, 0, 0);
+					leftBox.lookAt(target);
+					leftBox.position.copy(center);
+				}
 			}
 
 			centroid.add(point);
@@ -296,10 +320,12 @@ export class Profile extends THREE.Object3D{
 		}
 		centroid.multiplyScalar(1 / this.points.length);
 
-		for (let i = 0; i < this.boxes.length; i++) {
-			let box = this.boxes[i];
+		if (!this.isGeocentric) {
+			for (let i = 0; i < this.boxes.length; i++) {
+				let box = this.boxes[i];
 
-			box.position.z = min.z + (max.z - min.z) / 2;
+				box.position.z = min.z + (max.z - min.z) / 2;
+			}
 		}
 	}
 

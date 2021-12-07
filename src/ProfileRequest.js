@@ -182,7 +182,7 @@ export class ProfileRequest {
 		yield true;
 	};
 
-	* getAccepted(numPoints, node, matrix, segment, segmentDir, points, totalMileage){
+	* getAccepted(numPoints, node, matrix, segment, segmentDir, points, totalMileage, nodeMatrix){
 		let checkpoint = performance.now();
 
 		let accepted = new Uint32Array(numPoints);
@@ -210,15 +210,23 @@ export class ProfileRequest {
 				svp.subVectors(pos, segment.start);
 				let localMileage = segmentDir.dot(svp);
 
+				const coord = new itowns.Coordinates('EPSG:4978', pos.x, pos.y, pos.z).as('EPSG:2154');
 				accepted[numAccepted] = i;
 				mileage[numAccepted] = localMileage + totalMileage;
 				points.boundingBox.expandByPoint(pos);
 
-				pos.sub(this.pointcloud.position);
+				// pos.sub(this.pointcloud.position);
 
-				acceptedPositions[3 * numAccepted + 0] = pos.x;
-				acceptedPositions[3 * numAccepted + 1] = pos.y;
-				acceptedPositions[3 * numAccepted + 2] = pos.z;
+				// pos.set(
+				// 	view[i * 3 + 0],
+				// 	view[i * 3 + 1],
+				// 	view[i * 3 + 2]);
+
+				// pos.applyMatrix4(nodeMatrix);
+
+				acceptedPositions[3 * numAccepted + 0] = coord.x;
+				acceptedPositions[3 * numAccepted + 1] = coord.y;
+				acceptedPositions[3 * numAccepted + 2] = coord.z;
 
 				numAccepted++;
 			}
@@ -301,7 +309,7 @@ export class ProfileRequest {
 				let accepted = null;
 				let mileage = null;
 				let acceptedPositions = null;
-				for(let result of this.getAccepted(numPoints, node, matrix, segment, segmentDir, points,totalMileage)){
+				for(let result of this.getAccepted(numPoints, node, matrix, segment, segmentDir, points,totalMileage, nodeMatrix)){
 					if(!result){
 						let duration = performance.now() - checkpoint;
 						//console.log(`getPointsInsideProfile yield after ${duration}ms`);

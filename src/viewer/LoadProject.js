@@ -89,7 +89,7 @@ function loadMeasurement(viewer, data){
 		return;
 	}
 
-	const measure = new Measure();
+	const measure = new Measure(this.viewer);
 
 	measure.uuid = data.uuid;
 	measure.name = data.name;

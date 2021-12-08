@@ -281,7 +281,7 @@ function createAzimuth(){
 }
 
 export class Measure extends THREE.Object3D {
-	constructor () {
+	constructor (viewer) {
 		super();
 
 		this.constructor.counter = (this.constructor.counter === undefined) ? 0 : this.constructor.counter + 1;
@@ -328,6 +328,7 @@ export class Measure extends THREE.Object3D {
 		this.add(this.circleCenter);
 
 		this.add(this.azimuth.node);
+		this.isGeocentric = viewer.isGeocentric;
 
 	}
 
@@ -717,15 +718,29 @@ export class Measure extends THREE.Object3D {
 			this.heightLabel.visible = this.showHeight;
 
 			if (this.showHeight) {
+
 				let sorted = this.points.slice().sort((a, b) => a.position.z - b.position.z);
+				if (this.isGeocentric) {
+					sorted = this.points.slice().sort((a, b) => a.position.length() - b.position.length());
+				}
+
 				let lowPoint = sorted[0].position.clone();
 				let highPoint = sorted[sorted.length - 1].position.clone();
+
 				let min = lowPoint.z;
 				let max = highPoint.z;
+				if (this.isGeocentric) {
+					min = lowPoint.length();
+					max = highPoint.length();
+				}
 				let height = max - min;
 
 				let start = new THREE.Vector3(highPoint.x, highPoint.y, min);
 				let end = new THREE.Vector3(highPoint.x, highPoint.y, max);
+				if (this.isGeocentric) {
+					start = highPoint.clone().sub(highPoint.clone().normalize().multiplyScalar( height) );
+					end = highPoint.clone();
+				}
 
 				heightEdge.position.copy(lowPoint);
 

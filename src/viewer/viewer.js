@@ -139,6 +139,7 @@ export class Viewer extends EventDispatcher{
 		this.edlOpacity = 1.0;
 		this.useEDL = false;
 		this.description = "";
+		this.dynamicNearFar = args.dynamicNearFar == undefined ? true : args.dynamicNearFar;
 
 		this.classifications = ClassificationScheme.DEFAULT;
 
@@ -1729,7 +1730,7 @@ export class Viewer extends EventDispatcher{
 			}
 			const tEnd = performance.now();
 
-			if(result.lowestSpacing !== Infinity){
+			if(this.dynamicNearFar && result.lowestSpacing !== Infinity){
 				let near = result.lowestSpacing * 10.0;
 				let far = -this.getBoundingBox().applyMatrix4(camera.matrixWorldInverse).min.z;
 

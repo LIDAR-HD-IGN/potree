@@ -434,8 +434,10 @@ export class Viewer extends EventDispatcher{
 			}
 
 			this.controls = controls;
-			this.controls.enabled = true;
-			this.inputHandler.addInputListener(this.controls);
+			if (this.controls) {
+				this.controls.enabled = true;
+				this.inputHandler.addInputListener(this.controls);
+			}
 		}
 	}
 

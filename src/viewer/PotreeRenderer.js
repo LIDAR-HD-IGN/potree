@@ -88,7 +88,9 @@ export class PotreeRenderer {
 		renderer.render(viewer.clippingTool.sceneMarker, viewer.scene.cameraScreenSpace); //viewer.scene.cameraScreenSpace);
 		renderer.render(viewer.clippingTool.sceneVolume, camera);
 
-		renderer.render(viewer.controls.sceneControls, camera);
+		if (viewer.controls) {
+			renderer.render(viewer.controls.sceneControls, camera);
+		}
 		
 		renderer.clearDepth();
 		

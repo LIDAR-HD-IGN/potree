@@ -312,7 +312,9 @@ export class HQSplatRenderer{
 
 		viewer.dispatchEvent({type: "render.pass.perspective_overlay",viewer: viewer});
 
-		viewer.renderer.render(viewer.controls.sceneControls, camera);
+		if (viewer.controls) {
+			viewer.renderer.render(viewer.controls.sceneControls, camera);
+		}
 		viewer.renderer.render(viewer.clippingTool.sceneVolume, camera);
 		viewer.renderer.render(viewer.transformationTool.scene, camera);
 

@@ -24,7 +24,8 @@
         "focus_control": "Vue complète",
         "orbit_control": "Orbite",
         "flight_control": "Vol",
-        "earth_control": "Earth"
+        "earth_control": "Earth",
+        "divider_measurement": "Mesure"
     },
     "appearance": {
         "nb_max_pts": "Nb points max", 
@@ -38,6 +39,7 @@
         "edl_radius": "Rayon",
         "edl_strength": "Intensité",
         "edl_enable": "Activer",
+        "edl_opacity": "Opacité",
         "min_node_size": "Taille minimum des noeuds",
         "clip_mode": "Mode d'intersection",
         "move_speed": "Vitesse",
@@ -45,7 +47,10 @@
         "bottom_lock": "Rester au-dessus du sol",
         "box": "Boite",
         "freeze": "Vérouiller la vue",
-        "language": "Choix de la langue"
+        "language": "Choix de la langue",
+        "edl_divider": "Eclairage par pome",
+        "bg_divider": "Fond",
+        "other_divider": "Autres"
     },
     "profile": {
         "nb_points": "Nombre de points",

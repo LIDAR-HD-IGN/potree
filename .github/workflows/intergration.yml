@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - itowns_potree
+      - itowns_potree_dev
   pull_request:
     branches:
-      - itowns_potree
+      - itowns_potree_dev
 
 name: integration
 env:
@@ -34,7 +34,7 @@ jobs:
 
     # Prepare archive to deploying
     - name: Archive production artifacts
-      if: ${{ success() && github.ref == 'refs/heads/itowns_potree' }}
+      if: ${{ success() && github.ref == 'refs/heads/itowns_potree_dev' }}
       uses: actions/upload-artifact@v2
       with:
         name: dist-potree
@@ -51,7 +51,7 @@ jobs:
   # Deploy on web site
   deploy:
     needs: tests
-    if: ${{ github.ref == 'refs/heads/itowns_potree' }}
+    if: ${{ github.ref == 'refs/heads/itowns_potree_dev' }}
     runs-on: ubuntu-latest
     name: Deploy to itowns.github.io
     steps:

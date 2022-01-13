@@ -11,7 +11,7 @@ export class HeightPanel extends MeasurePanel{
 			<div class="measurement_content selectable">
 				<span class="coordinates_table_container"></span>
 				<br>
-				<span id="height_label">Height: </span><br>
+				<span id="height_label" data-i18n="measurements.height"></span>: <br>
 
 				<!-- ACTIONS -->
 				<div style="display: flex; margin-top: 12px">

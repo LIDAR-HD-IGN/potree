@@ -284,7 +284,7 @@ export class Sidebar{
 
 		{ // SHOW / HIDE Measurements
 			let elShow = $("#measurement_options_show");
-			elShow.selectgroup({title: "Show/Hide labels"});
+			elShow.selectgroup({dataI18n: "tt.show_hide_labels"});
 
 			elShow.find("input").click( (e) => {
 				const show = e.target.value === "SHOW";
@@ -1143,7 +1143,7 @@ export class Sidebar{
 				<li>
 					<label style="whitespace: nowrap">
 						<input id="toggleClassificationFilters" type="checkbox" checked/>
-						<span>show/hide all</span>
+						<span data-i18n="tt.classification_show_hide_all"></span>
 					</label>
 				</li>
 			`);
@@ -1160,7 +1160,7 @@ export class Sidebar{
 		const addInvertButton = () => { 
 			const element = $(`
 				<li>
-					<input type="button" value="invert" />
+					<input type="button" data-i18n="[value]tt.classification_invert" value="invert" />
 				</li>
 			`);
 

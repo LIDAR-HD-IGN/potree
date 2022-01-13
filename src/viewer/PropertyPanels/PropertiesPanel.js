@@ -119,7 +119,7 @@ export class PropertiesPanel{
 				<li><span data-i18n="appearance.point_opacity"></span>:<span id="lblOpacity"></span><div id="sldOpacity"></div></li>
 
 				<div class="divider">
-					<span>Attribute</span>
+					<span data-i18n="tt.attribute"></span>
 				</div>
 
 				<li>
@@ -141,12 +141,12 @@ export class PropertiesPanel{
 
 				<div id="materials.rgb_container">
 					<div class="divider">
-						<span>RGB</span>
+						<span data-i18n="attribute.rgb"></span>
 					</div>
 
-					<li>Gamma: <span id="lblRGBGamma"></span> <div id="sldRGBGamma"></div>	</li>
-					<li>Brightness: <span id="lblRGBBrightness"></span> <div id="sldRGBBrightness"></div>	</li>
-					<li>Contrast: <span id="lblRGBContrast"></span> <div id="sldRGBContrast"></div>	</li>
+					<li><span data-i18n="attribute.gamma"></span> : <span id="lblRGBGamma"></span> <div id="sldRGBGamma"></div>	</li>
+					<li><span data-i18n="attribute.brightness"></span> : <span id="lblRGBBrightness"></span> <div id="sldRGBBrightness"></div>	</li>
+					<li><span data-i18n="attribute.contrast"></span> : <span id="lblRGBContrast"></span> <div id="sldRGBContrast"></div>	</li>
 				</div>
 
 				<div id="materials.extra_container">
@@ -163,7 +163,7 @@ export class PropertiesPanel{
 				
 				<div id="materials.matcap_container">
 					<div class="divider">
-						<span>MATCAP</span>
+						<span data-i18n="attribute.matcap"></span>
 					</div>
 
 					<li>
@@ -173,7 +173,7 @@ export class PropertiesPanel{
 
 				<div id="materials.color_container">
 					<div class="divider">
-						<span>Color</span>
+						<span data-i18n="attribute.color"></span>
 					</div>
 
 					<input id="materials.color.picker" />
@@ -182,21 +182,21 @@ export class PropertiesPanel{
 
 				<div id="materials.elevation_container">
 					<div class="divider">
-						<span>Elevation</span>
+						<span data-i18n="attribute.elevation"></span>
 					</div>
 
 					<li><span data-i18n="appearance.elevation_range"></span>: <span id="lblHeightRange"></span> <div id="sldHeightRange"></div>	</li>
 
 					<li>
 						<selectgroup id="gradient_repeat_option">
-							<option id="gradient_repeat_clamp" value="CLAMP">Clamp</option>
-							<option id="gradient_repeat_repeat" value="REPEAT">Repeat</option>
-							<option id="gradient_repeat_mirrored_repeat" value="MIRRORED_REPEAT">Mirrored Repeat</option>
+							<option id="gradient_repeat_clamp" value="CLAMP"><span data-i18n="attribute.clamp"></span></option>
+							<option id="gradient_repeat_repeat" value="REPEAT"><span data-i18n="attribute.repeat"></span></option>
+							<option id="gradient_repeat_mirrored_repeat" value="MIRRORED_REPEAT"><span data-i18n="attribute.mirrored_repeat"</span></option>
 						</selectgroup>
 					</li>
 
 					<li>
-						<span>Gradient Scheme:</span>
+						<span data-i18n="attribute.gradient_scheme"> :</span>
 						<div id="elevation_gradient_scheme_selection" style="display: flex; padding: 1em 0em">
 						</div>
 					</li>
@@ -212,25 +212,25 @@ export class PropertiesPanel{
 
 				<div id="materials.intensity_container">
 					<div class="divider">
-						<span>Intensity</span>
+						<span data-i18n="attribute.intensity"></span>
 					</div>
 
-					<li>Range: <span id="lblIntensityRange"></span> <div id="sldIntensityRange"></div>	</li>
-					<li>Gamma: <span id="lblIntensityGamma"></span> <div id="sldIntensityGamma"></div>	</li>
-					<li>Brightness: <span id="lblIntensityBrightness"></span> <div id="sldIntensityBrightness"></div>	</li>
-					<li>Contrast: <span id="lblIntensityContrast"></span> <div id="sldIntensityContrast"></div>	</li>
+					<li><span data-i18n="attribute.range"></span> : <span id="lblIntensityRange"></span> <div id="sldIntensityRange"></div>	</li>
+					<li><span data-i18n="attribute.gamma"></span> : <span id="lblIntensityGamma"></span> <div id="sldIntensityGamma"></div>	</li>
+					<li><span data-i18n="attribute.brightness"></span> : <span id="lblIntensityBrightness"></span> <div id="sldIntensityBrightness"></div>	</li>
+					<li><span data-i18n="attribute.contrast"></span> : <span id="lblIntensityContrast"></span> <div id="sldIntensityContrast"></div>	</li>
 				</div>
 
 				<div id="materials.gpstime_container">
 					<div class="divider">
-						<span>GPS Time</span>
+						<span data-i18n="attribute.gps_time"></span>
 					</div>
 
 				</div>
 				
 				<div id="materials.index_container">
 					<div class="divider">
-						<span>Indices</span>
+						<span data-i18n="attribute.indices"></span>
 					</div>
 				</div>
 

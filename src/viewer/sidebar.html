@@ -69,8 +69,8 @@
 
 			<li>
 				<selectgroup id="measurement_options_show">
-					<option id="measurement_options_show_yes" value="SHOW">Show</option>
-					<option id="measurement_options_show_no" value="HIDE">Hide</option>
+					<option id="measurement_options_show_yes" value="SHOW"><span data-i18n="tt.show_labels"></span></option>
+					<option id="measurement_options_show_no" value="HIDE"><span data-i18n="tt.hide_labels"></span></option>
 				</selectgroup>
 			</li>
 
@@ -107,11 +107,11 @@
 
 			<div id="scene_export"></div>
 
-			<div class="divider"><span>Objects</span></div>
+			<div class="divider"><span data-i18n="tt.scene_objects"></span></div>
 
 			<div id="scene_objects"></div>
 
-			<div class="divider"><span>Properties</span></div>
+			<div class="divider"><span data-i18n="tt.scene_properties"></span></div>
 
 			<div id="scene_object_properties"></div>
 		</div>
@@ -120,11 +120,11 @@
 		<h3 id="menu_filters"><span data-i18n="tb.filters_opt"></span></h3>
 		<div>
 
-			<div class="divider"><span>Classification</span></div>
+			<div class="divider"><span data-i18n="tt.classification"></span></div>
 
 			<ul id="classificationList" class="pv-menu-list"></ul>
 
-			<div class="divider"><span>Returns</span></div>
+			<div class="divider"><span data-i18n="tt.returns"></span></div>
 
 			<div id="return_filter_panel">
 				<ul class="pv-menu-list">
@@ -135,7 +135,7 @@
 				</ul>
 			</div>
 
-			<div class="divider"><span>Point Source ID</span></div>
+			<div class="divider"><span data-i18n="tt.point_source_id"></span></div>
 
 			<div>
 				<ul class="pv-menu-list" id="pointsourceid_filter_panel">
@@ -143,7 +143,7 @@
 				</ul>
 			</div>
 
-			<div class="divider"><span>GPS Time</span></div>
+			<div class="divider"><span data-i18n="tt.gps_time"></span></div>
 
 			<div id="gpstime_filter_panel">
 
@@ -152,9 +152,9 @@
 
 						<li>
 							<span style="display: flex">
-								<span>Time: </span>
-								<input id="txtGpsTime" type="text" style="margin: auto 10px"/>
-								<input id="btnFindGpsTime" type="button" value="find" />
+								<span data-i18n="tt.time">: </span>
+								<input id="txtGpsTime" type="text" style="margin: auto 10px; max-width: 150px"/>
+								<input id="btnFindGpsTime" type="button" data-i18n="[value]tt.find" value="find" />
 							</span>
 						</li>
 

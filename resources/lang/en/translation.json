@@ -47,7 +47,23 @@
 		"remove_all_clipping_volumes": "Remove all clipping volumes",
 		"compass": "Compass",
 		"camera_animation": "Camera Animation",
-        "divider_measurement": "Measurement"
+        "divider_measurement": "Measurement",
+		"show_hide_labels": "Show/Hide labels",
+		"show_labels": "Show",
+		"hide_labels": "Hide",
+		"scene_objects": "Objects",
+		"scene_properties": "Properties",
+		"classification": "Classification",
+		"classification_show_hide_all": "show/hide all",
+		"classification_invert": "invert",
+		"returns": "Returns",
+		"point_source_id": "Point Source ID",
+		"to": "to",
+		"range": "Range",
+		"gps_time": "GPS Time",
+		"time": "time",
+		"find": "find",
+		"attribute": "Attribute"
 	},
 	"appearance": {
 		"nb_max_pts": "Point budget", 
@@ -81,7 +97,9 @@
 	},
 	"measurements": {
 		"clip": "clip",
-		"show": "show volume"
+		"show": "show volume",
+		"height": "Height",
+		"area": "Area"
 	},
 	"annotations": {
 		"show3D": "show in 3D",
@@ -106,5 +124,23 @@
 	},
 	"settings": {
 		"language": "Language"
+	},
+	"attribute" : {
+		"rgb": "RGB",
+		"extra_attribute": "Extra Attribute",
+		"matcap": "MATCAP",
+		"color": "Couleur",
+		"elevation": "Altitude",
+		"clamp": "Clamp",
+		"repeat": "Repeat",
+		"mirrored_repeat": "Mirrored Repeat",
+		"gradient_scheme": "Gradient Scheme",
+		"intensity": "Intensity",
+		"range": "Range",
+		"gamma": "Gamma",
+		"brightness": "Brightness",
+		"contrast": "Contrast",
+		"gps_time": "GPS Time",
+		"indices": "Indices"
 	}
 }

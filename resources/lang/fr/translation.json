@@ -7,12 +7,15 @@
         "materials_opt": "Matériaux",
         "scene_opt": "Scène",
         "classification_filter_opt": "Filtre de classification",
+        "filters_opt": "Filtres",
         "parameters_opt": "Autres paramètres",
         "about_opt": "À propos"
     },
     "tt": {
         "angle_measurement": "Mesurer un angle",
+        "point_measurement": "Mesurer un point",
         "distance_measurement": "Mesurer une distance",
+        "height_measurement": "Mesurer une dénivelée",
         "area_measurement": "Mesurer une surface",
         "volume_measurement": "Mesurer un volume",
         "height_profile": "Mesurer un profil",
@@ -25,7 +28,23 @@
         "orbit_control": "Orbite",
         "flight_control": "Vol",
         "earth_control": "Earth",
-        "divider_measurement": "Mesure"
+        "divider_measurement": "Mesure",
+        "show_hide_labels": "Afficher/Masquer les labels",
+        "show_labels": "Afficher",
+        "hide_labels": "Masquer",
+        "scene_objects": "Objets",
+        "scene_properties": "Propriétés",
+        "classification": "Classification",
+        "classification_show_hide_all": "tout afficher / tout masquer",
+        "classification_invert": "inverser",
+        "returns": "Retours",
+        "point_source_id": "ID des points",
+        "to": "à",
+        "range": "Interval",
+        "gps_time": "Temps GPS",
+        "time": "temps",
+        "find": "trouver",
+        "attribute": "Attribut"
     },
     "appearance": {
         "nb_max_pts": "Nb points max", 
@@ -52,12 +71,41 @@
         "bg_divider": "Fond",
         "other_divider": "Autres"
     },
+    "measurements": {
+        "height": "Hauteur",
+        "area": "Surface"
+    },
     "profile": {
         "nb_points": "Nombre de points",
         "title": "Profil altimétrique",
         "save": "Enregistrer"
     },
+    "filters": {
+        "return_number": "Numéro de retour",
+        "number_of_returns": "Nombre de retours",
+        "gps_min": "min",
+        "gps_max": "max",
+        "gps_time": "GPS Time"
+    },
     "settings": {
         "language": "Langue"
+    },
+    "attribute" : {
+        "rgb": "RGB",
+        "extra_attribute": "Attribut supplémentaire",
+        "matcap": "MATCAP",
+        "color": "Couleur",
+        "elevation": "Altitude",
+        "clamp": "Délimité",
+        "repeat": "Repetition",
+        "mirrored_repeat": "Repetition inverse",
+        "gradient_scheme": "Schéma de gradient",
+        "intensity": "Intensité",
+        "range": "Étendue",
+        "gamma": "Gamma",
+        "brightness": "Luminosité",
+        "contrast": "Contraste",
+        "gps_time": "Temps GPS",
+        "indices": "Indices"
     }
 }

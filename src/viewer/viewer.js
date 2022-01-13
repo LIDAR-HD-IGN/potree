@@ -1284,6 +1284,7 @@ export class Viewer extends EventDispatcher{
 			}, function (t) {
 				// Start translation once everything is loaded
 				$('body').i18n();
+				$('#optPointSizing').selectmenu("refresh");
 			});
 
 			$(() => {
